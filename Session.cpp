@@ -1,34 +1,33 @@
 #include "Session.h"
 class Agent;
 
-    enum TreeType {
-        Cycle,
-        MaxRank,
-        Root
-    };
 
-    class Session {
-    public:
-        Session(const std::string &path);
+Session(const std::string& path) {
 
-        void simulate();
+}
 
-        void addAgent(const Agent &agent) {
-            agents.push_back(agent);
-        };
+void simulate() {
 
-        void setGraph(const Graph &graph){
-            g = &graph
-        };
+}
+void Session::addAgent(const Agent &agent) {
+    agents.push_back(agent);
+}
 
-        void enqueueInfected(int);
+void Session::setGraph(const Graph& graph) {
+    g = graph;
+}
 
-        int dequeueInfected();
+void Session::enqueueInfected(int a) {
+    infected.push(a);
+};
 
-        TreeType getTreeType() const;
+int dequeueInfected() {
 
-    private:
-        Graph g;
-        TreeType treeType;
-        std::vector<Agent *> agents;
-    };
+}
+TreeType Session::getTreeType() const {
+    return treeType;
+}
+
+Graph Session::getGraph() {
+    return g;
+}

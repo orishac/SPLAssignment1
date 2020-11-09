@@ -9,6 +9,8 @@ public:
     
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
+    int getOneNeighbor(int NodeInd);
+    void bfs();
 private:
     std::vector<std::vector<int>> edges;
 };
