@@ -2,5 +2,3 @@
 
 private:
 Session& session;
-
-dddd
