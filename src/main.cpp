@@ -15,10 +15,8 @@ int main(int argc, char** argv){
     json j;
     j << i;
     cout << j["graph"] << endl;
-    return 0;
-    /*
     Session sess(argv[1]);
     sess.simulate();
     return 0;
-     */
-}
+
+};

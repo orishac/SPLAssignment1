@@ -4,12 +4,19 @@
 class Agent;
 
 
-Session(const std::string& path) {
-
+Session::Session(const std::string &path) : g({}) {
+    ifstream i(json.hpp);
+    json j;
+    i >> j;
+    g= Graph(j["graph"]);
+    string tree(j["Tree"]);
+    vector<Agent*> agents(j["Agent"]);
 }
 
-void simulate() {
-
+void Session::simulate() {
+    for (auto& elem:agents) {
+        elem->act();
+    }
 }
 void Session::addAgent(const Agent &agent) {
     agents.push_back(agent);

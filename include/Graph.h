@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
@@ -10,7 +11,7 @@ public:
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
     int getOneNeighbor(int NodeInd);
-    int BFSVisit(int NodeInd);
+    Tree* BFSScan(int NodeInd, const Session& session);
 private:
     std::vector<std::vector<int>> edges;
 

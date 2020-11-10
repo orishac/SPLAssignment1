@@ -18,9 +18,6 @@ int Graph::getOneNeighbor(int NodeInd) {
             return i;
     }
 };
+Tree* Graph::BFSScan(int NodeInd, const Session& session) {
 
-int Graph::BFSVisit(int rootNodeInd) {
-
-
-}
-;
+};
