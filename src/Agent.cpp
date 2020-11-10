@@ -5,10 +5,13 @@ Agent::Agent() {};
 ContactTracer::ContactTracer() {};
 
 Virus::Virus(int nodeInd) : nodeInd(nodeInd){
+    //
 };
 
 void Virus::act(Session &session) {
-
+    int v = session.getGraph().getNonInfectedNeighbor(nodeInd);
+    session.enqueueInfected(v);
+    session.getGraph().infectNode(v);
 };
 
 void ContactTracer::act(Session &session) {

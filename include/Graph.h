@@ -13,11 +13,14 @@ public:
     bool isInfected(int nodeInd);
     int getOneNeighbor(int NodeInd);
     int getSize();
+    int getNonInfectedNeighbor(int NodeInd);
 
     std::vector<std::vector<int>> getMatrix();
 
 private:
     std::vector<std::vector<int>> edges;
+    std::vector<bool> infection;
+
 
 };
 
