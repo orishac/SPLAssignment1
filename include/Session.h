@@ -3,6 +3,8 @@
 
 #include <string>
 #include "Graph.h"
+#include "Tree.h"
+#include "Agent.h"
 #include <queue>
 
 class Agent;

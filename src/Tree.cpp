@@ -3,10 +3,12 @@
 #include <vector>
 #include <queue>
 #include "../include/Session.h"
+#include "../include/Agent.h"
+#include "../include/Graph.h"
 
 
 
-Tree::Tree(int rootLabel) : node(rootLabel){
+Tree::Tree(int rootLabel) : node(), children(){
     node = rootLabel;
 };
 
@@ -21,10 +23,18 @@ void Tree::addChild(const Tree &child) {
 };
 
 
-Tree * Tree::createTree(const Session &session, int rootLabel) {
-    TreeType type = session.getTreeType();
-    Tree* root;
-    Graph cuurG = session.
+Tree* Tree::createTree(const Session &session, int rootLabel) {
+    Tree* retTree;
+    if (session.getTreeType()==Cycle) {
+        retTree = new CycleTree(rootLabel, session.getTreeType());
+    }
+    if (session.getTreeType()==MaxRank) {
+        retTree = new MaxRankTree(rootLabel);
+    }
+    if (session.getTreeType()==Root) {
+        retTree = new RootTree(rootLabel);
+    }
+
 };
 
 
@@ -46,5 +56,4 @@ void Tree::bfs(Session &session) {
             }
         }
     }
-
 };

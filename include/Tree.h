@@ -2,6 +2,9 @@
 #define TREE_H_
 
 #include <vector>
+#include "Session.h"
+#include "Graph.h.h"
+#include "Agent.h"
 
 class Session;
 
@@ -31,6 +34,7 @@ class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
+    int returnBiggest();
 };
 
 class RootTree: public Tree{
