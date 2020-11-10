@@ -1,5 +1,6 @@
 #include "Graph.h"
 #include <vector>
+#include <queue>
 
 Graph::Graph(std::vector<std::vector<int>> matrix) : edges (matrix) {
 
@@ -16,4 +17,13 @@ int Graph::getOneNeighbor(int NodeInd) {
         if (edges[NodeInd][i]==1)
             return i;
     }
+};
+
+int Graph::BFSVisit(int NodeInd) {
+    std::queue<int> BFSqueue;
+    for (int i=0; i<edges[NodeInd].size(); i++) {
+        BFSqueue.push(edges[NodeInd][i]);
+    }
+    Graph::BFSVisit(BFSVisit(NodeInd));
 }
+;

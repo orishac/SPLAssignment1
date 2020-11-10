@@ -14,5 +14,5 @@ void Virus::act(Session &session) {
 }
 
 void ContactTracer::act(Session &session) {
-    session.dequeueInfected();
+    int infected = session.dequeueInfected();
 }

@@ -8,7 +8,13 @@ Tree::Tree(int rootLabel) : Tree(new std::vector<Tree*>){
 };
 
 void Tree::addChild(const Tree &child) {
-    children.push_back(child);
+    for (int i=0; i<children.size(); i++) {
+        if (child.node<children[i]->node) {
+            Tree* temp = children[i];
+            children[i]
+
+        }
+    }
 };
 
 

@@ -1,4 +1,6 @@
 #include "Session.h"
+#include "Tree.h"
+
 class Agent;
 
 
@@ -30,4 +32,8 @@ TreeType Session::getTreeType() const {
 
 Graph Session::getGraph() {
     return g;
+};
+
+Tree BFS() {
+
 }
