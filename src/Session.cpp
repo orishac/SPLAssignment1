@@ -1,7 +1,10 @@
 #include "../include/Session.h"
-#include "Tree.h"
-
-class Agent;
+#include "../include/Tree.h"
+#include <fstream>
+#include <iostream>
+#include "../include/json.hpp"
+#include <vector>
+#include <random>
 
 
 Session::Session(const std::string &path) : g({}) {
@@ -17,9 +20,10 @@ void Session::simulate() {
     for (auto& elem:agents) {
         elem->act();
     }
-}
+};
 void Session::addAgent(const Agent &agent) {
-    agents.push_back(agent);
+    Agent* clone=agent.clone();
+    agents.push_back(clone);
 }
 
 void Session::setGraph(const Graph& graph) {
@@ -40,7 +44,3 @@ TreeType Session::getTreeType() const {
 Graph Session::getGraph() {
     return g;
 };
-
-Tree BFS() {
-
-}

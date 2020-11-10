@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/Session.h"
 #include <fstream>
-#include "json.hpp"
+#include "../include/json.hpp"
 
 using namespace std;
 using json = nlohmann::json;

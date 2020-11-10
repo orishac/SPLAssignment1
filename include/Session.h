@@ -1,7 +1,6 @@
 #ifndef SESSION_H_
 #define SESSION_H_
 
-#include <vector>
 #include <string>
 #include "Graph.h"
 #include <queue>
