@@ -19,6 +19,11 @@ int Graph::getOneNeighbor(int NodeInd) {
             return i;
     }
 };
-Tree* Graph::BFSScan(int NodeInd, const Session& session) {
 
-};
+int Graph::getSize() {
+    return edges.size();
+}
+
+std::vector<std::vector<int>> Graph::getMatrix() {
+    return edges;
+}

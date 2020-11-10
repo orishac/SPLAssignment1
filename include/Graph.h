@@ -12,7 +12,10 @@ public:
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
     int getOneNeighbor(int NodeInd);
-    Tree* BFSScan(int NodeInd, const Session& session);
+    int getSize();
+
+    std::vector<std::vector<int>> getMatrix();
+
 private:
     std::vector<std::vector<int>> edges;
 
