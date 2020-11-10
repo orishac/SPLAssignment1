@@ -9,11 +9,11 @@
 
 
 Session::Session(const std::string &path) : g({}) {
-    std::ifstream i(json.hpp);
+    ifstream i(json.hpp);
     nlohmann::json j;
     i >> j;
     g= Graph(j["graph"]);
-    std::string tree(j["Tree"]);
+    string tree(j["Tree"]);
     std::vector<Agent*> agents(j["Agent"]);
 };
 
@@ -25,22 +25,24 @@ void Session::simulate() {
 void Session::addAgent(const Agent &agent) {
     Agent* clone=agent.clone();
     agents.push_back(clone);
-}
+};
 
 void Session::setGraph(const Graph& graph) {
     g = graph;
-}
+};
 
 void Session::enqueueInfected(int a) {
     infected.push(a);
 };
 
-int dequeueInfected() {
+int Session::dequeueInfected() {
+    int i = infected.front();
+    infected.pop();
+};
 
-}
 TreeType Session::getTreeType() const {
     return treeType;
-}
+};
 
 Graph Session::getGraph() {
     return g;

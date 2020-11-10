@@ -7,7 +7,8 @@
 
 
 Tree::Tree(int rootLabel) : node(rootLabel){
-}
+    node = rootLabel;
+};
 
 
 void Tree::addChild(const Tree &child) {
@@ -15,15 +16,17 @@ void Tree::addChild(const Tree &child) {
         if (child.node<children[i]->node) {
             Tree* temp = children[i];
             children[i];
-
         }
     }
 };
 
 
-static Tree* createTree(const Session& session, int rootLabel) {
-
+Tree * Tree::createTree(const Session &session, int rootLabel) {
+    TreeType type = session.getTreeType();
+    Tree* root;
+    Graph cuurG = session.
 };
+
 
 void Tree::bfs(Session &session) {
     std::queue<Tree*> nextNode;
