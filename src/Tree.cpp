@@ -30,6 +30,7 @@ Tree* Tree::createTree(const Session &session, int rootLabel) {
         retTree = new RootTree(rootLabel);
     }
 
+    return retTree;
 };
 
 
@@ -51,4 +52,27 @@ void Tree::bfs(Session &session) {
             }
         }
     }
+};
+
+int Tree::getRoot() {
+    return node;
+};
+
+Tree * Tree::getChildren(int nodeInd) {
+    return children[nodeInd];
+}
+
+int MaxRankTree::traceTree() {
+
+};
+
+int RootTree::traceTree() {
+    return getRoot();
+};
+
+int CycleTree::traceTree() {
+    if (getChildren(0)!=nullptr)
+        return getChildren(0)->traceTree();
+    else
+        return getRoot();
 };

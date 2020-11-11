@@ -13,8 +13,8 @@ public:
     Tree(int rootLabel);
     void addChild(const Tree& child);
     void bfs(Session& session);
-
-
+    int getRoot();
+    Tree* getChildren(int nodeInd);
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
 private:
@@ -34,7 +34,6 @@ class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
-    int returnBiggest();
 };
 
 class RootTree: public Tree{
