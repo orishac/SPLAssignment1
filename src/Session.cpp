@@ -32,7 +32,7 @@ void Session::simulate() {
 };
 void Session::addAgent(const Agent &agent) {
     Agent* cloneAgent = agent.clone();
-    agents.push_back(clone);
+    agents.push_back(cloneAgent);
 };
 
 void Session::setGraph(const Graph& graph) {

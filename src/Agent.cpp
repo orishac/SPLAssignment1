@@ -31,11 +31,10 @@ void ContactTracer::act(Session &session) {
     }
 };
 
-
-Agent * Virus::clone() {
+Agent * Virus::clone() const {
     return new Virus(*this);
 };
 
-Agent * ContactTracer::clone() {
+Agent * ContactTracer::clone() const {
     return new ContactTracer(*this);
 };
