@@ -1,11 +1,15 @@
+
 #include "Agent.h"
 
 Agent::Agent() {};
 
 ContactTracer::ContactTracer() {};
 
-Virus::Virus(int nodeInd) : nodeInd(nodeInd){
-    //
+Virus::Virus(int _nodeInd) : nodeInd(_nodeInd){
+};
+
+Virus::Virus(const Virus &otherVirus) : nodeInd(otherVirus.nodeInd) {
+
 };
 
 void Virus::act(Session &session) {
@@ -25,4 +29,13 @@ void ContactTracer::act(Session &session) {
         session.getGraph().getMatrix()[biggest][j] = 0;
         session.getGraph().getMatrix()[j][biggest] = 0;
     }
+};
+
+
+Agent * Virus::clone() {
+    return new Virus(*this);
+};
+
+Agent * ContactTracer::clone() {
+    return new ContactTracer(*this);
 };

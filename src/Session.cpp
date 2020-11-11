@@ -31,7 +31,7 @@ void Session::simulate() {
     }
 };
 void Session::addAgent(const Agent &agent) {
-    Agent* clone=agent.clone();
+    Agent* cloneAgent = agent.clone();
     agents.push_back(clone);
 };
 
