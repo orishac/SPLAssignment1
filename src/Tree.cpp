@@ -1,11 +1,6 @@
-#include "../include/Tree.h"
-#include <iostream>
+#include "Tree.h"
 #include <vector>
 #include <queue>
-#include "../include/Session.h"
-#include "../include/Agent.h"
-#include "../include/Graph.h"
-
 
 
 Tree::Tree(int rootLabel) : node(), children(){

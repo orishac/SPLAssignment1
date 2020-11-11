@@ -1,7 +1,6 @@
-#include "../include/Graph.h"
-#include "../include/Tree.h"
+#include "Graph.h"
 #include <vector>
-#include <queue>
+
 
 Graph::Graph(std::vector<std::vector<int>> matrix) : edges (matrix) {
 };

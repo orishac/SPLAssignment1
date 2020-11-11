@@ -1,4 +1,4 @@
-#include "../include/Agent.h"
+#include "Agent.h"
 
 Agent::Agent() {};
 
@@ -9,9 +9,11 @@ Virus::Virus(int nodeInd) : nodeInd(nodeInd){
 };
 
 void Virus::act(Session &session) {
+    if (!session.getGraph().isInfected(nodeInd))
+        session.enqueueInfected(nodeInd);
     int v = session.getGraph().getNonInfectedNeighbor(nodeInd);
-    session.enqueueInfected(v);
-    session.getGraph().infectNode(v);
+    Virus* newV = new Virus(v);
+    session.addAgent(*newV);
 };
 
 void ContactTracer::act(Session &session) {

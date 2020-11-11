@@ -27,12 +27,15 @@ public:
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
+
+    virtual ~Session();
     
 private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
     std::queue<int> infected;
+    std::vector<bool> IsInfected;
 };
 
 #endif

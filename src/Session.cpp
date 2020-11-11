@@ -1,22 +1,28 @@
-#include "../include/Session.h"
-#include "../include/Tree.h"
+#include "Session.h"
+#include "Tree.h"
 #include <fstream>
 #include <iostream>
-#include "../include/json.hpp"
+#include "json.hpp"
 #include <vector>
-#include "../include/Agent.h"
-#include "../include/Graph.h"
+#include "Agent.h"
+#include "Graph.h"
+
 using json = nlohmann:: json;
 using namespace std;
 
 
-Session::Session(const std::string &path) : g({}) {
-    ifstream i(json.hpp);
+Session::Session(const std::string &path) : g({}), treeType(), agents({}) {
+    ifstream i(path);
     nlohmann::json j;
     i >> j;
     g = Graph(j["graph"]);
-    string tree(j["Tree"]);
-    std::vector<Agent*> agents(j["Agent"]);
+    treeType = j["Tree"];
+    for (pair <string, int> dec : j["agents"]) {
+        if (dec.first == "V")
+            agents.push_back(new Virus(dec.second));
+        else
+            agents.push_back(new ContactTracer());
+    }
 };
 
 void Session::simulate() {
@@ -35,6 +41,7 @@ void Session::setGraph(const Graph& graph) {
 
 void Session::enqueueInfected(int a) {
     infected.push(a);
+    IsInfected[a]=true;
 };
 
 int Session::dequeueInfected() {
@@ -48,4 +55,12 @@ TreeType Session::getTreeType() const {
 
 Graph Session::getGraph() {
     return g;
+};
+
+ Session::~Session() {
+    for (auto &agent : agents) {
+        if (agent != nullptr)
+            delete (agent);
+    }
+    agents.clear();
 };
