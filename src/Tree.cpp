@@ -54,6 +54,10 @@ void Tree::bfs(Session &session) {
     }
 };
 
+int Tree::childrenSize() {
+    return children.size();
+}
+
 int Tree::getRoot() {
     return node;
 };
@@ -63,7 +67,14 @@ Tree * Tree::getChildren(int nodeInd) {
 }
 
 int MaxRankTree::traceTree() {
-
+    int ret = childrenSize();
+    if (childrenSize() > 0) {
+        for (int i = 0; i < childrenSize(); i++) {
+            if (getChildren(i)->traceTree() > ret)
+                ret = getChildren(i)->traceTree();
+        }
+    }
+    return ret;
 };
 
 int RootTree::traceTree() {

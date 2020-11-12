@@ -24,7 +24,7 @@ void ContactTracer::act(Session &session) {
     int i = session.dequeueInfected();
     MaxRankTree* maxRank = new MaxRankTree(i);
     maxRank->bfs(session);
-    int biggest = maxRank->returnBiggest();
+    int biggest = maxRank->traceTree());
     for (int j=0; i<session.getGraph().getSize() ; j++) {
         session.getGraph().getMatrix()[biggest][j] = 0;
         session.getGraph().getMatrix()[j][biggest] = 0;
