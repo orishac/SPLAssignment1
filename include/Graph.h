@@ -15,6 +15,7 @@ public:
     int getOneNeighbor(int NodeInd);
     int getSize();
     int getNonInfectedNeighbor(int NodeInd);
+    void clear();
 
     std::vector<std::vector<int>> getMatrix();
 

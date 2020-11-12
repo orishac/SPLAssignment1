@@ -5,7 +5,6 @@
 
 class Session;
 
-class Session;
 
 class Agent{
 public:

@@ -18,10 +18,14 @@ public:
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
     int childrenSize();
+    void clear();
+    void copy (const int node, const std::vector<Tree*> children);
 
-    Tree (const Tree &aTree); //copy constructor
     virtual ~Tree(); //destructor
+    Tree (const Tree &aTree); //copy constructor
     Tree &operator=(const Tree &tree); //copy assignment operator
+    Tree (Tree &&other); //move constructor
+    Tree& operator=(Tree &&other); //move assignment operator
 
 private:
     int node;

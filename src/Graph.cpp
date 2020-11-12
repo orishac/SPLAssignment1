@@ -32,3 +32,8 @@ int Graph::getSize() {
 std::vector<std::vector<int>> Graph::getMatrix() {
     return edges;
 }
+
+void Graph::clear() {
+    edges.clear();
+    infection.clear();
+}

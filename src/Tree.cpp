@@ -88,3 +88,46 @@ int CycleTree::traceTree() {
     else
         return getRoot();
 };
+
+void Tree::clear() {
+    node = 0;
+    children.clear();
+}
+
+void Tree::copy(const int other_node, const std::vector<Tree *> other_children) {
+    node = other_node;
+    children = other_children;
+}
+
+Tree::~Tree() { //destructor
+    clear();
+}
+
+Tree::Tree(const Tree &aTree) { //copy constructor
+    copy(aTree.node, aTree.children);
+}
+
+Tree & Tree::operator=(const Tree &tree) { //copy assignment operator
+    if (this != &tree) {
+        clear();
+        copy(tree.node, tree.children);
+    }
+    return *this;
+}
+
+Tree::Tree(Tree &&other) :node(other.node), children(other.children) { //move constructor
+    other.node = 0;
+    other.children.clear();
+}
+
+Tree & Tree::operator=(Tree &&other) { //move assignment operator
+    if (this != &other) {
+        clear();
+        node = other.node;
+        children = other.children;
+        other.node = 0;
+        other.children.clear();
+    }
+}
+
+

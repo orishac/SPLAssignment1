@@ -25,9 +25,14 @@ public:
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
+    void clear();
+    void copy(const Graph g, const TreeType treeType, const std::vector<Agent*> agents,
+                 const std::queue<int > infected, const std::vector<bool> IsInfected);
     virtual ~Session(); //destructor
-    Session & operator=(const Session &session); //copy assignment operator
-    Session (const Session &aSession); //copy constructor
+    Session& operator=(const Session &session); //copy assignment operator
+    Session(const Session &aSession, Graph g); //copy constructor
+    Session(Session &&other); //move constructor
+    Session& operator=(Session &&other); //move assignment
     
 private:
     Graph g;
