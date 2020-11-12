@@ -13,7 +13,13 @@ void Tree::addChild(const Tree &child) {
     for (int i=0; i<children.size(); i++) {
         if (child.node<children[i]->node) {
             Tree* temp = children[i];
-            children[i];
+            Tree *copyChild = child.clone();
+            children[i] = copyChild;
+            for (int j=i+1; j<childrenSize(); j++) {
+                Tree *push = children[j];
+                children[j] = temp;
+                temp=push;
+            }
         }
     }
 };
@@ -53,6 +59,8 @@ void Tree::bfs(Session &session) {
             }
         }
     }
+    while (!nextNode.empty())
+        nextNode.pop();
 };
 
 int Tree::childrenSize() {
@@ -63,10 +71,29 @@ int Tree::getRoot() {
     return node;
 };
 
-Tree * Tree::getChildren(int nodeInd) {
-    return children[nodeInd];
+int MaxRankTree::traceNeighbor() {
+    int ret;
+    for (int i=0; i<childrenSize(); i++) {
+        if (getChildren(i)->childrenSize() > ret) {
+            ret = getChildren(i)->getRoot();
+        }
+    }
+    return ret;
 }
 
+Tree * Tree::getChildren(int nodeInd) {
+    return children[nodeInd];
+};
+
+Tree * CycleTree::clone() const {
+    return new CycleTree(*this);
+};
+Tree * RootTree::clone() const {
+    return new RootTree(*this);
+};
+Tree * MaxRankTree::clone() const {
+    return new MaxRankTree(*this);
+};
 int MaxRankTree::traceTree() {
     int ret = childrenSize();
     if (childrenSize() > 0) {

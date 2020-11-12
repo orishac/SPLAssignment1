@@ -7,8 +7,7 @@ Graph::Graph(std::vector<std::vector<int>> matrix) : edges (matrix) {
 };
 
 void Graph::infectNode(int nodeInd) {
-    Virus* v =  new Virus(nodeInd);
-
+    infection[nodeInd] = true;
 }
 bool Graph::isInfected(int nodeInd){
     if (infection[nodeInd] == true)

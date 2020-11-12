@@ -20,6 +20,7 @@ public:
     int childrenSize();
     void clear();
     void copy (const int node, const std::vector<Tree*> children);
+    virtual Tree *clone() const =0;
 
     virtual ~Tree(); //destructor
     Tree (const Tree &aTree); //copy constructor
@@ -30,12 +31,15 @@ public:
 private:
     int node;
     std::vector<Tree*> children;
+
+
 };
 
 class CycleTree: public Tree{
 public:
     CycleTree(int rootLabel, int currCycle);
     virtual int traceTree();
+    virtual Tree *clone() const;
 private:
     int currCycle;
 };
@@ -44,12 +48,15 @@ class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
     virtual int traceTree();
+    virtual Tree *clone() const;
+    int traceNeighbor();
 };
 
 class RootTree: public Tree{
 public:
     RootTree(int rootLabel);
     virtual int traceTree();
+    virtual Tree *clone() const;
 };
 
 #endif

@@ -15,6 +15,7 @@ enum TreeType{
   Root
 };
 
+
 class Session{
 public:
     Session(const std::string& path);

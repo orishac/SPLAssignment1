@@ -12,7 +12,6 @@ public:
     
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
-    int getOneNeighbor(int NodeInd);
     int getSize();
     int getNonInfectedNeighbor(int NodeInd);
     void clear();
