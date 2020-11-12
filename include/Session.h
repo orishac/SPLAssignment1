@@ -2,12 +2,12 @@
 #define SESSION_H_
 
 #include <string>
-#include "Graph.h"
-#include "Tree.h"
-#include "Agent.h"
 #include <queue>
+#include "Graph.h"
 
 class Agent;
+class Graph;
+class Tree;
 
 enum TreeType{
   Cycle,

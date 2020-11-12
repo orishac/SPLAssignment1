@@ -2,7 +2,8 @@
 #define AGENT_H_
 
 #include <vector>
-#include "Session.h"
+
+class Session;
 
 class Session;
 

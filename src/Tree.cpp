@@ -1,4 +1,5 @@
 #include "Tree.h"
+#include "Session.h"
 #include <vector>
 #include <queue>
 

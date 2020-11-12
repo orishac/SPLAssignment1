@@ -1,12 +1,12 @@
 #ifndef TREE_H_
 #define TREE_H_
 
+
 #include <vector>
-#include "Session.h"
-#include "Graph.h"
-#include "Agent.h"
 
 class Session;
+class Graph;
+class Agent;
 
 class Tree{
 public:

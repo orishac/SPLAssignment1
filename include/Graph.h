@@ -2,7 +2,8 @@
 #define GRAPH_H_
 
 #include <vector>
-#include "Tree.h"
+
+class Agent;
 
 
 class Graph{
