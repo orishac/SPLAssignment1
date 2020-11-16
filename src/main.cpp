@@ -13,7 +13,7 @@ int main(int argc, char** argv){
     }
     ifstream i("config1.json");
     json j;
-    j << i;
+    i >> j;
     cout << j["graph"] << endl;
     Session sess(argv[1]);
     sess.simulate();

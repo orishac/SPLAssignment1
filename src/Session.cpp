@@ -26,9 +26,17 @@ Session::Session(const std::string &path) : g({}), treeType(), agents({}) {
 };
 
 void Session::simulate() {
-    for (auto& elem:agents) {
-        elem->act(*this);
+    while(!infectionCheck()) {
+        for (auto &elem:agents) {
+            elem->act(*this);
+        }
     }
+    json output;
+    output["graph"]=g.getMatrix();
+    output["infected"]=infected;
+    ofstream i("../bin");
+    output >> i;
+
 };
 void Session::addAgent(const Agent &agent) {
     Agent* cloneAgent = agent.clone();
@@ -40,13 +48,14 @@ void Session::setGraph(const Graph& graph) {
 };
 
 void Session::enqueueInfected(int a) {
-    infected.push(a);
+    infected.push_back(a);
     IsInfected[a]=true;
 };
 
 int Session::dequeueInfected() {
-    int i = infected.front();
-    infected.pop();
+    int i = infected.back();
+    infected.front();
+    infected.erase(infected.begin());
 };
 
 TreeType Session::getTreeType() const {
@@ -61,14 +70,12 @@ void Session::clear() {
     g.clear();
     agents.clear();
     IsInfected.clear();
-    while (!infected.empty()) {
-        infected.pop();
-    };
+    infected.clear();
 
 }
 
 void Session::copy(const Graph other_g, const TreeType other_treeType, const std::vector<Agent *> other_agents,
-                   const std::queue<int> other_infected, const std::vector<bool> other_IsInfected) {
+                   const std::vector<int> other_infected, const std::vector<bool> other_IsInfected) {
     g = other_g;
     treeType = other_treeType;
     agents = other_agents;
@@ -117,3 +124,14 @@ void Session::copy(const Graph other_g, const TreeType other_treeType, const std
          other.IsInfected = {};
      }
  }
+
+bool Session::infectionCheck() {
+    for (int i=0; i<g.getMatrix().size(); i++) {
+        for(int j=0; i<g.getMatrix()[i].size(); i++)
+            if (g.getMatrix()[i][j]==1) {
+                if (g.isInfected(i) & !g.isInfected(j))
+                    return false;
+            }
+    }
+    return true;
+}
