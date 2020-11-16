@@ -26,13 +26,15 @@ int Graph::getNonInfectedNeighbor(int NodeInd) {
 
 int Graph::getSize() {
     return edges.size();
-}
+};
 
 std::vector<std::vector<int>> Graph::getMatrix() {
     return edges;
-}
+};
 
 void Graph::clear() {
     edges.clear();
     infection.clear();
-}
+};
+
+Graph::~Graph() {};

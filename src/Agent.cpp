@@ -23,7 +23,7 @@ void Virus::act(Session &session) {
 
 void ContactTracer::act(Session &session) {
     int i = session.dequeueInfected();
-    MaxRankTree* maxRank = new MaxRankTree(i);
+    MaxRankTree* maxRank = new MaxRankTree(0, i);
     maxRank->bfs(session);
     int biggest = maxRank->traceTree();
     for (int j=0; j<session.getGraph().getSize() ; j++) {
@@ -40,3 +40,12 @@ Agent * Virus::clone() const {
 Agent * ContactTracer::clone() const {
     return new ContactTracer(*this);
 };
+
+Agent::~Agent() {};
+
+Agent * Agent::clone() const {};
+
+void Agent::act(Session &session) {};
+
+
+

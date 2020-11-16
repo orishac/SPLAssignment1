@@ -15,6 +15,7 @@ public:
     int getSize();
     int getNonInfectedNeighbor(int NodeInd);
     void clear();
+    virtual ~Graph();
 
     std::vector<std::vector<int>> getMatrix();
 

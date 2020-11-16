@@ -10,7 +10,8 @@ class Agent{
 public:
     Agent();
     virtual Agent* clone() const =0;
-    virtual void act(Session& session);
+    virtual void act(Session& session)=0;
+    virtual ~Agent();
 };
 
 class ContactTracer: public Agent{

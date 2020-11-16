@@ -62,7 +62,7 @@ TreeType Session::getTreeType() const {
     return treeType;
 };
 
-Graph Session::getGraph() {
+Graph& Session::getGraph() {
     return g;
 };
 

@@ -22,7 +22,7 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-    Graph getGraph();
+    Graph & getGraph();
     bool infectionCheck();
     void enqueueInfected(int);
     int dequeueInfected();
