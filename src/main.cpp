@@ -11,7 +11,7 @@ int main(int argc, char** argv){
         cout << "usage cTrace <config_path>" << endl;
         return 0;
     }
-    ifstream i("config1.json");
+    ifstream i("../bin/config1.json");
     json j;
     i >> j;
     cout << j["graph"] << endl;

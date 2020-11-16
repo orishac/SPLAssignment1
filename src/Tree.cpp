@@ -28,13 +28,13 @@ void Tree::addChild(const Tree &child) {
 Tree* Tree::createTree(const Session &session, int rootLabel) {
     Tree* retTree;
     if (session.getTreeType()==Cycle) {
-        retTree = new CycleTree(0, rootLabel, session.getTreeType());
+        retTree = new CycleTree(rootLabel, session.getTreeType());
     }
     if (session.getTreeType()==MaxRank) {
-        retTree = new MaxRankTree(0, rootLabel);
+        retTree = new MaxRankTree(rootLabel);
     }
     if (session.getTreeType()==Root) {
-        retTree = new RootTree(0, rootLabel);
+        retTree = new RootTree(rootLabel);
     }
 
     return retTree;
@@ -165,15 +165,15 @@ Tree * Tree::clone() const {};
 
 int Tree::traceTree() {};
 
-CycleTree::CycleTree(int rootLabel1, int rootLabel, int currCycle) : Tree(rootLabel1) {
+CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel) {
     setRoot(rootLabel);
     currCycle = currCycle;
 }
 
-MaxRankTree::MaxRankTree(int rootLabel1, int rootLabel) : Tree(rootLabel1) {
+MaxRankTree::MaxRankTree(int rootLabel) :Tree(rootLabel) {
     setRoot(rootLabel);
 }
 
-RootTree::RootTree(int rootLabel1, int rootLabel) : Tree(rootLabel1) {
+RootTree::RootTree(int rootLabel) :Tree(rootLabel) {
     setRoot(rootLabel);
 }

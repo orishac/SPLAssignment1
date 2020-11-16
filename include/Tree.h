@@ -38,7 +38,7 @@ private:
 
 class CycleTree: public Tree{
 public:
-    CycleTree(int rootLabel1, int rootLabel, int currCycle);
+    CycleTree(int rootLabel, int currCycle);
     virtual int traceTree();
     virtual Tree *clone() const;
 private:
@@ -47,7 +47,7 @@ private:
 
 class MaxRankTree: public Tree{
 public:
-    MaxRankTree(int rootLabel1, int rootLabel);
+    MaxRankTree(int rootLabel);
     virtual int traceTree();
     virtual Tree *clone() const;
     int traceNeighbor();
@@ -55,7 +55,7 @@ public:
 
 class RootTree: public Tree{
 public:
-    RootTree(int rootLabel1, int rootLabel);
+    RootTree(int rootLabel);
     virtual int traceTree();
     virtual Tree *clone() const;
 };
