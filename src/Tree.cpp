@@ -10,7 +10,7 @@ Tree::Tree(int rootLabel) : node(), children(){
 
 
 void Tree::addChild(const Tree &child) {
-    for (int i=0; i<children.size(); i++) {
+    for (unsigned int i=0; i<children.size(); i++) {
         if (child.node<children[i]->node) {
             Tree* temp = children[i];
             Tree *copyChild = child.clone();
@@ -117,7 +117,9 @@ int CycleTree::traceTree() {
 };
 
 void Tree::clear() {
-    node = 0;
+    for (Tree* child:children) {
+        delete child;
+    }
     children.clear();
 }
 
@@ -130,7 +132,7 @@ Tree::~Tree() { //destructor
     clear();
 }
 
-Tree::Tree(const Tree &aTree) { //copy constructor
+Tree::Tree(const Tree &aTree) : node(aTree.node), children(){ //copy constructor
     copy(aTree.node, aTree.children);
 }
 
@@ -155,22 +157,20 @@ Tree & Tree::operator=(Tree &&other) { //move assignment operator
         other.node = 0;
         other.children.clear();
     }
+
+    return *this;
 }
 
 void Tree::setRoot(int otherNode) {
     node = otherNode;
 }
 
-Tree * Tree::clone() const {};
-
-int Tree::traceTree() {};
-
-CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel) {
+CycleTree::CycleTree(int rootLabel, int currCycle) : Tree(rootLabel), currCycle(currCycle){
     setRoot(rootLabel);
     currCycle = currCycle;
 }
 
-MaxRankTree::MaxRankTree(int rootLabel) :Tree(rootLabel) {
+MaxRankTree::MaxRankTree(int rootLabel) :Tree(rootLabel)  {
     setRoot(rootLabel);
 }
 

@@ -74,10 +74,14 @@ Graph& Session::getGraph() {
 };
 
 void Session::clear() {
-    g.clear();
+    for (auto &agent : agents) {
+        if (agent != nullptr)
+            delete (agent);
+    }
     agents.clear();
-    IsInfected.clear();
+    g.clear();
     infected.clear();
+    IsInfected.clear();
 
 }
 
@@ -96,6 +100,9 @@ void Session::copy(const Graph other_g, const TreeType other_treeType, const std
             delete (agent);
     }
     agents.clear();
+    g.clear();
+    infected.clear();
+    IsInfected.clear();
 };
 
  Session::Session(const Session &aSession, Graph g) : g({}), treeType(), agents({}), infected({}), IsInfected({}) { //copy constructor
