@@ -3,20 +3,21 @@
 #include <vector>
 
 
-Graph::Graph(std::vector<std::vector<int>> matrix) : edges (matrix) {
+Graph::Graph(std::vector<std::vector<int>> matrix) : edges (matrix), infection(matrix.size()) {
+
 };
 
 void Graph::infectNode(int nodeInd) {
     infection[nodeInd] = true;
 }
 bool Graph::isInfected(int nodeInd){
-    if (infection[nodeInd] == true)
+    if (infection[nodeInd])
         return true;
     return false;
 };
 
 int Graph::getNonInfectedNeighbor(int NodeInd) {
-    for (int i = 0; i<edges[NodeInd].size(); i++) {
+    for (unsigned int i = 0; i<edges[NodeInd].size(); i++) {
         if (edges[NodeInd][i]==1) {
             if(!infection[i])
                 return i;

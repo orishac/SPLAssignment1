@@ -1,7 +1,5 @@
 #include "Session.h"
-#include "Tree.h"
 #include <fstream>
-#include <iostream>
 #include "json.hpp"
 #include <vector>
 #include "Agent.h"
@@ -11,12 +9,20 @@ using json = nlohmann:: json;
 using namespace std;
 
 
-Session::Session(const std::string &path) : g({}), treeType(), agents({}) {
+Session::Session(const std::string &path) : g({}), treeType(), agents({}), infected({}), IsInfected({}) {
     ifstream i(path);
     nlohmann::json j;
     i >> j;
     g = Graph(j["graph"]);
-    treeType = j["Tree"];
+    if(j["tree"]== "M") {
+        treeType = MaxRank;
+    }
+    if(j["tree"]== "R") {
+        treeType = Root;
+    }
+    if(j["tree"]== "C") {
+        treeType = Cycle;
+    }
     for (pair <string, int> dec : j["agents"]) {
         if (dec.first == "V")
             agents.push_back(new Virus(dec.second));
@@ -34,8 +40,8 @@ void Session::simulate() {
     json output;
     output["graph"]=g.getMatrix();
     output["infected"]=infected;
-    ofstream i("../bin");
-    output >> i;
+    ofstream i("../bin/output.json");
+    i << output;
 
 };
 void Session::addAgent(const Agent &agent) {
@@ -56,6 +62,7 @@ int Session::dequeueInfected() {
     int i = infected.back();
     infected.front();
     infected.erase(infected.begin());
+    return i;
 };
 
 TreeType Session::getTreeType() const {
@@ -91,7 +98,7 @@ void Session::copy(const Graph other_g, const TreeType other_treeType, const std
     agents.clear();
 };
 
- Session::Session(const Session &aSession, Graph g) : g({}) { //copy constructor
+ Session::Session(const Session &aSession, Graph g) : g({}), treeType(), agents({}), infected({}), IsInfected({}) { //copy constructor
      copy(aSession.g, aSession.treeType, aSession.agents,aSession.infected, aSession.IsInfected);
  };
 
@@ -123,14 +130,18 @@ void Session::copy(const Graph other_g, const TreeType other_treeType, const std
          other.infected = {};
          other.IsInfected = {};
      }
+     return *this;
  }
 
 bool Session::infectionCheck() {
-    for (int i=0; i<g.getMatrix().size(); i++) {
-        for(int j=0; i<g.getMatrix()[i].size(); i++)
+    for (unsigned int i=0; i<g.getMatrix().size(); i++) {
+        for(unsigned int j=0; j<g.getMatrix()[i].size(); j++)
             if (g.getMatrix()[i][j]==1) {
-                if (g.isInfected(i) & !g.isInfected(j))
-                    return false;
+                if (g.isInfected(i)) {
+                    if (!g.isInfected(j)) {
+                        return false;
+                    }
+                }
             }
     }
     return true;
