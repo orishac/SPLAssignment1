@@ -10,15 +10,44 @@ Tree::Tree(int rootLabel) : node(), children(){
 
 
 void Tree::addChild(const Tree &child) {
-    for (unsigned int i=0; i<children.size(); i++) {
-        if (child.node<children[i]->node) {
-            Tree* temp = children[i];
+    bool added = false;
+    if (childrenSize()==0) {
+        Tree *copyChild = child.clone();
+        children.push_back(copyChild);
+        added = true;
+    }
+    for (unsigned int i=0; !added & i<children.size(); i++) {
+        if (child.node < children[i]->node) {
+            Tree *temp = children[i];
             Tree *copyChild = child.clone();
-            children[i] = copyChild;
-            for (int j=i+1; j<childrenSize(); j++) {
-                Tree *push = children[j];
-                children[j] = temp;
-                temp=push;
+            for (unsigned int j = i; j <= childrenSize(); j++) {
+                children[j] = copyChild;
+                copyChild = temp;
+                if (j != childrenSize()) {
+                    temp = children[j + 1];
+                }
+            }
+            added = true;
+        } else if (!added & (i < childrenSize()-1)) {
+            if (child.node > children[i]->node & child.node < children[i + 1]->node &added) {
+                Tree *temp = children[i+1];
+                Tree *copyChild = child.clone();
+                for (unsigned int j = i+1; !added & j < childrenSize(); j++) {
+                    children[j] = copyChild;
+                    copyChild = temp;
+                    if (j != childrenSize()) {
+                        temp = children[j + 1];
+                    }
+                }
+
+            }
+            added = true;
+        }
+        else {
+            if (!added) {
+                Tree *copyChild = child.clone();
+                children.push_back(copyChild);
+                added = true;
             }
         }
     }
