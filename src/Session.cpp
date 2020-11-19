@@ -9,7 +9,7 @@ using json = nlohmann:: json;
 using namespace std;
 
 
-Session::Session(const std::string &path) : g({}), treeType(), agents({}), infected({}), IsInfected({}) {
+Session::Session(const std::string &path) : g({}), treeType(), agents({}), infected({}), IsInfected(g.getSize(), false) {
     ifstream i(path);
     nlohmann::json j;
     i >> j;
@@ -29,9 +29,16 @@ Session::Session(const std::string &path) : g({}), treeType(), agents({}), infec
         else
             agents.push_back(new ContactTracer());
     }
+
+    IsInfected.assign(g.getSize(), false);
+
+
 };
 
 void Session::simulate() {
+    for (auto &elem:agents) {
+        elem->act(*this);
+    }
     while(!infectionCheck()) {
         for (auto &elem:agents) {
             elem->act(*this);
