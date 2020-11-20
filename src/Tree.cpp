@@ -82,6 +82,7 @@ void Tree::bfs(Session &session) {
                 Tree* a = createTree(session, i);
                 currNode->addChild(*a);
                 Tree* realChild = currNode->getSameChild(a->node);
+                delete a;
                 nextNode.push(realChild);
                 visited[i] = true;
             }

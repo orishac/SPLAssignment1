@@ -16,8 +16,7 @@ void Virus::act(Session &session) {
         session.getGraph().infectNode(nodeInd);
     }
     int v = session.getGraph().getNonInfectedNeighbor(nodeInd);
-    Virus* newV = new Virus(v);
-    session.addAgent(*newV);
+    session.addAgent(Virus(v));
 };
 
 void ContactTracer::act(Session &session) {
@@ -40,8 +39,6 @@ Agent * ContactTracer::clone() const {
 };
 
 Agent::~Agent() {};
-
-Agent * Agent::clone() const {};
 
 void Agent::act(Session &session) {};
 
