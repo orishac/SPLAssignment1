@@ -46,7 +46,12 @@ void Session::simulate() {
     }
     json output;
     output["graph"]=g.getMatrix();
-    output["infected"]=infected;
+    std::vector<int> realInfected;
+    for (int i=0; i<IsInfected.size(); i++) {
+        if (IsInfected[i] == true)
+            realInfected.push_back(i);
+    }
+    output["infected"]=realInfected;
     ofstream i("../bin/output.json");
     i << output;
 

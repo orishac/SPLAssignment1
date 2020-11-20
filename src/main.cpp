@@ -10,7 +10,7 @@ int main(int argc, char** argv){
     if(argc != 2){
         cout << "usage cTrace <config_path>" << endl;
     }
-    Session sess("../config1.json");
+    Session sess(argv[1]);
     sess.simulate();
     sess.clear();
     return 0;
