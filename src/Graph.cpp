@@ -38,4 +38,15 @@ void Graph::clear() {
     infection.clear();
 };
 
-Graph::~Graph() {};
+Graph::~Graph() {}
+
+void Graph::isolate(int toIsolate) {
+    for (int i=0; i<getSize(); i++) {
+        if (edges[i][toIsolate]== 1) {
+            edges[i][toIsolate]= 0;
+        }
+        if (edges[toIsolate][i]== 1) {
+            edges[toIsolate][i] = 0;
+        }
+    }
+};

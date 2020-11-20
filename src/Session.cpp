@@ -80,6 +80,10 @@ Graph& Session::getGraph() {
     return g;
 };
 
+std::vector<int> Session::getInfected() {
+    return infected;
+}
+
 void Session::clear() {
     for (auto &agent : agents) {
         if (agent != nullptr)

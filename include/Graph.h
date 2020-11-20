@@ -19,6 +19,8 @@ public:
 
     std::vector<std::vector<int>> getMatrix();
 
+    void isolate(int i);
+
 private:
     std::vector<std::vector<int>> edges;
     std::vector<bool> infection;

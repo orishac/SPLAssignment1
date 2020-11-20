@@ -134,7 +134,7 @@ int MaxRankTree::traceTree() {
     Tree* treeRet = this;
     std::vector<Tree*> allChilds;
     allChilds.push_back(this);
-    this->fillMaxRankVector(allChilds);
+    allChilds = fillMaxRankVector(allChilds);
     for (Tree * child : allChilds) {
         if (child->childrenSize() > treeRet->childrenSize()) {
             treeRet = child;
@@ -144,13 +144,14 @@ int MaxRankTree::traceTree() {
     return ret;
 };
 
-void Tree::fillMaxRankVector(std::vector<Tree*> vector) {
+std::vector<Tree*> Tree::fillMaxRankVector(std::vector<Tree*> vector) {
     if (childrenSize()>0) {
-        for (Tree *child : children) {
+        for (Tree *child :children) {
             vector.push_back(child);
-            child->fillMaxRankVector(vector);
+            vector = child->fillMaxRankVector(vector);
         }
     }
+    return vector;
 }
 
 int RootTree::traceTree() {

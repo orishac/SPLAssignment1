@@ -23,7 +23,7 @@ public:
     virtual Tree *clone() const =0;
     void setRoot(int otherNode);
     Tree* getSameChild(int nodeInd);
-    void fillMaxRankVector(std::vector<Tree*> vector);
+    std::vector<Tree*> fillMaxRankVector(std::vector<Tree*> vector);
 
     virtual ~Tree(); //destructor
     Tree (const Tree &aTree); //copy constructor

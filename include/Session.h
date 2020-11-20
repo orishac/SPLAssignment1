@@ -26,6 +26,7 @@ public:
     bool infectionCheck();
     void enqueueInfected(int);
     int dequeueInfected();
+    std::vector<int> getInfected();
     TreeType getTreeType() const;
     void clear();
     void copy(const Graph g, const TreeType treeType, const std::vector<Agent*> agents,
