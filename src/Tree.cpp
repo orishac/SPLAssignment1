@@ -11,12 +11,12 @@ Tree::Tree(int rootLabel) : node(), children(){
 
 void Tree::addChild(const Tree &child) {
     bool added = false;
-    if (childrenSize()==0) {
+    if (childrenSize() == 0) {
         Tree *copyChild = child.clone();
         children.push_back(copyChild);
         added = true;
     }
-    for (unsigned int i=0; !added & i<children.size(); i++) {
+    for (unsigned int i = 0; !added & i < children.size(); i++) {
         if (child.node < children[i]->node) {
             Tree *temp = children[i];
             Tree *copyChild = child.clone();
@@ -28,28 +28,25 @@ void Tree::addChild(const Tree &child) {
                 }
             }
             added = true;
-        } else if (!added & (i < childrenSize()-1)) {
-            if (child.node > children[i]->node & child.node < children[i + 1]->node &added) {
-                Tree *temp = children[i+1];
+        } else if (!added & (i < childrenSize() - 1)) {
+            if (child.node > children[i]->node & child.node < children[i + 1]->node & !added) {
+                Tree *temp = children[i + 1];
                 Tree *copyChild = child.clone();
-                for (unsigned int j = i+1; !added & j < childrenSize(); j++) {
+                for (unsigned int j = i + 1; !added & j < childrenSize(); j++) {
                     children[j] = copyChild;
                     copyChild = temp;
                     if (j != childrenSize()) {
                         temp = children[j + 1];
                     }
                 }
-
-            }
-            added = true;
-        }
-        else {
-            if (!added) {
-                Tree *copyChild = child.clone();
-                children.push_back(copyChild);
-                added = true;
+                added =true;
             }
         }
+    }
+    if (!added) {
+        Tree *copyChild = child.clone();
+        children.push_back(copyChild);
+        added = true;
     }
 };
 
@@ -73,6 +70,7 @@ Tree* Tree::createTree(const Session &session, int rootLabel) {
 void Tree::bfs(Session &session) {
     std::queue<Tree*> nextNode;
     std::vector<bool> visited(session.getGraph().getSize(), false);
+    visited[this->node]=true;
     Graph second = session.getGraph();
     nextNode.push(this);
     Tree* currNode;
@@ -83,13 +81,15 @@ void Tree::bfs(Session &session) {
             if (second.getMatrix()[currNode->node][i]==1 && !visited[i]) {
                 Tree* a = createTree(session, i);
                 currNode->addChild(*a);
-                nextNode.push(a);
+                Tree* realChild = currNode->getSameChild(a->node);
+                nextNode.push(realChild);
                 visited[i] = true;
             }
         }
     }
     while (!nextNode.empty())
         nextNode.pop();
+
 };
 
 int Tree::childrenSize() {
@@ -99,6 +99,12 @@ int Tree::childrenSize() {
 int Tree::getRoot() {
     return node;
 };
+
+Tree*  Tree::getSameChild(int nodeInd) {
+    for (Tree* child: children)
+        if (child->node==nodeInd)
+            return child;
+}
 
 int MaxRankTree::traceNeighbor() {
     int ret;
@@ -124,15 +130,28 @@ Tree * MaxRankTree::clone() const {
     return new MaxRankTree(*this);
 };
 int MaxRankTree::traceTree() {
-    int ret = childrenSize();
-    if (childrenSize() > 0) {
-        for (int i = 0; i < childrenSize(); i++) {
-            if (getChildren(i)->traceTree() > ret)
-                ret = getChildren(i)->traceTree();
+    int ret = this->getRoot();
+    Tree* treeRet = this;
+    std::vector<Tree*> allChilds;
+    allChilds.push_back(this);
+    this->fillMaxRankVector(allChilds);
+    for (Tree * child : allChilds) {
+        if (child->childrenSize() > treeRet->childrenSize()) {
+            treeRet = child;
+            ret = child->getRoot();
         }
     }
     return ret;
 };
+
+void Tree::fillMaxRankVector(std::vector<Tree*> vector) {
+    if (childrenSize()>0) {
+        for (Tree *child : children) {
+            vector.push_back(child);
+            child->fillMaxRankVector(vector);
+        }
+    }
+}
 
 int RootTree::traceTree() {
     return getRoot();
